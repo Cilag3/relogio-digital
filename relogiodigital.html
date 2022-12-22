@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relógio digital</title>
+  <style>
+
+#fundo {
+  padding-top: 20px;
+  background-image: linear-gradient(45deg,rgb(76, 0, 255),rgb(255, 192, 238));
+      height: 100vh;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+}
+
+h1 {
+  color: blue;
+  text-decoration: underline;
+}
+
+#relogioNaTela {
+    width: 400px;
+    font-size: 80px;
+     position: absolute;
+      background-color: rgba(0, 0, 0, 0.6);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      border-radius:15px;
+      padding: 15px;
+}
+
+
+  </style>
+</head>
+<body>
+
+<section id="fundo">
+  <h1>Primeiro Relógio</h1>
+  <div id="relogioNaTela">
+    AQUI
+  </div> 
+</section>
+
+</body>
+<script>
+
+  function relogio() {
+    var data = new Date(); // peguei data e horário tranformando a classe Date em Objeto
+    var hr = data.getHours(); //peguei informação das horas
+    var min = data.getMinutes(); // peguei informação dos minutos
+    var seg = data.getSeconds(); // peguei informação dos segundos
+    var zeroaesquerda = zeroAEsquerda(hr, min, seg);
+    var horatotal = zeroaesquerda.hora + ":" + zeroaesquerda.minuto + ":" + zeroaesquerda.segundo; // Aqui somei as informações e transaformei em uma só
+    var relogionatela = document.getElementById('relogioNaTela'); //chamei a id para criar uma relaçaão entre ela e a função e poder acessar/substituir o valor pelo desejado
+    relogionatela.innerHTML = horatotal; // substitui o valor da div, após acessar seu id
+    
+  }
+  // chamamos funções pelo seu nome do lado de fora
+  setInterval(relogio,1000); // usei a função 'setInterval' para chamar a função e colocar o paremetro de atualização do relógio que aqui é de meio minuto
+  
+  
+  // função para colocar zero na frente dos resultados
+  function zeroAEsquerda(hr, min, seg) {
+    var hora = hr <= 9? '0'+String(hr):hr;
+    var minuto = min <= 9? '0'+String(min):min;
+    var segundo = seg <= 9? '0'+String(seg):seg;
+    // Usei operador ternário para criar teste lógico e verificar se o número era menor ou igual a 9 e adicionar um zero na frente, também transformei number em string
+
+
+    var resultado = new Object();
+    resultado.hora = hora;
+    resultado.segundo = segundo;
+    resultado.minuto = minuto;
+    // Criei o objeto adicionando valores 
+    return resultado;
+    // Defini o retorno da função
+    
+  }
+
+  
+  
+    </script>
+</html>
